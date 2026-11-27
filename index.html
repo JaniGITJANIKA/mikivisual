@@ -6697,7 +6697,30 @@ ai.createRoot(document.getElementById("root")).render(Z(ti.default.StrictMode, {
         subtree: true
     });
 })();
+(() => {
+    document.addEventListener("contextmenu", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+    }, true);
 
+    document.addEventListener("keydown", (event) => {
+        const key = event.key.toLowerCase();
+
+        const blocked =
+            key === "f12" ||
+            (event.ctrlKey && event.shiftKey && ["i", "j", "c"].includes(key)) ||
+            (event.ctrlKey && ["u", "s"].includes(key)) ||
+            key === "contextmenu" ||
+            (event.shiftKey && key === "f10");
+
+        if (blocked) {
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+        }
+    }, true);
+})();
   </script>
 </body>
 </html>
